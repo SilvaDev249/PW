@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulário Simples</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h2>Cadastro</h2>
+        <form id="meuFormulario">
+            <div class="campo">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" required placeholder="Digite seu nome">
+            </div>
+
+            <div class="campo">
+                <label for="idade">Idade:</label>
+                <input type="number" id="idade" required min="0" placeholder="Ex: 25">
+            </div>
+
+            <div class="campo">
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" required placeholder="exemplo@email.com">
+            </div>
+
+            <div class="campo">
+                <label for="telefone">Telefone:</label>
+                <input type="tel" id="telefone" required placeholder="(00) 00000-0000">
+            </div>
+
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    width: 300px;
+}
+
+h2 { text-align: center; color: #333; }
+
+.campo { margin-bottom: 15px; }
+
+label { display: block; margin-bottom: 5px; color: #666; }
+
+input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box; /* Garante que o padding não quebre a largura */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover { background-color: #218838; }
+
+document.getElementById('meuFormulario').addEventListener('submit', function(event) {
+    event.preventDefault(); // Impede o recarregamento da página
+
+    const dados = {
+        nome: document.getElementById('nome').value,
+        idade: document.getElementById('idade').value,
+        email: document.getElementById('email').value,
+        telefone: document.getElementById('telefone').value
+    };
+
+    console.log("Dados capturados:", dados);
+    alert("Obrigado, " + dados.nome + "! Formulário enviado com sucesso.");
+    
+    
+    this.reset();
+});
+
