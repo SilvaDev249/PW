@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Áreas</title>
+    <style>
+    body { font-family: sans-serif; display: flex; justify-content: center; padding: 20px; background-color: #f4f4f9; }
+        .container { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 300px; }
+        select, input, button { width: 100%; margin: 10px 0; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        button { background-color: #007bff; color: white; border: none; cursor: pointer; font-weight: bold; }
+        button:hover { background-color: #0056b3; }
+        .hidden { display: none; }
+        #resultado { margin-top: 15px; font-weight: bold; color: #333; text-align: center; }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+    <h2>Calculadora de Áreas</h2>
+    
+    <label for="forma">Escolha a forma:</label>
+    <select id="forma" onchange="atualizarCampos()">
+        <option value="quadrado">Quadrado</option>
+        <option value="retangulo">Retângulo</option>
+        <option value="triangulo">Triângulo</option>
+        <option value="circulo">Círculo</option>
+    </select>
+
+    <div id="campo-base" class="hidden">
+        <input type="number" id="base" placeholder="Base / Lado">
+    </div>
+    <div id="campo-altura" class="hidden">
+        <input type="number" id="altura" placeholder="Altura">
+    </div>
+    <div id="campo-raio" class="hidden">
+        <input type="number" id="raio" placeholder="Raio">
+    </div>
+
+    <button onclick="calcular()">Calcular Área</button>
+
+    <div id="resultado"></div>
+</div>
+
+JS
+
+function atualizarCampos() {
+    const forma = document.getElementById('forma').value;
+    const b = document.getElementById('campo-base');
+    const a = document.getElementById('campo-altura');
+    const r = document.getElementById('campo-raio');
+    const res = document.getElementById('resultado');
+
+    b.classList.add('hidden');
+    a.classList.add('hidden');
+    r.classList.add('hidden');
+    res.innerHTML = "";
+
+    if (forma === 'quadrado') {
+        b.classList.remove('hidden');
+        document.getElementById('base').placeholder = "Lado";
+    } else if (forma === 'retangulo' || forma === 'triangulo') {
+        b.classList.remove('hidden');
+        a.classList.remove('hidden');
+        document.getElementById('base').placeholder = "Base";
+    } else if (forma === 'circulo') {
+        r.classList.remove('hidden');
+    }
+}
+
+function calcular() {
+    const forma = document.getElementById('forma').value;
+    const res = document.getElementById('resultado');
+    let area = 0;
+
+    if (forma === 'quadrado') {
+        const lado = parseFloat(document.getElementById('base').value);
+        area = lado * lado;
+    } else if (forma === 'retangulo') {
+        const base = parseFloat(document.getElementById('base').value);
+        const altura = parseFloat(document.getElementById('altura').value);
+        area = base * altura;
+    } else if (forma === 'triangulo') {
+        const base = parseFloat(document.getElementById('base').value);
+        const altura = parseFloat(document.getElementById('altura').value);
+        area = (base * altura) / 2;
+    } else if (forma === 'circulo') {
+        const raio = parseFloat(document.getElementById('raio').value);
+        area = Math.PI * Math.pow(raio, 2);
+    }
+
+    if (isNaN(area) || area <= 0) {
+        res.innerHTML = "Por favor, insira valores válidos.";
+    } else {
+        res.innerHTML = `Área: ${area.toFixed(2)}`;
+    }
+}
+
+atualizarCampos();
+
+<innerHTML></innerHTML>
